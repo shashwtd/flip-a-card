@@ -5,21 +5,34 @@
 }
 
 :root {
+    --text: rgb(63, 99, 86);
     --bg: rgb(12, 15, 18);
-    --card-bg: #c8c8c80f;
-    --card-bg-hover: #c8c8c833;
     --primary: #000;
     --cum: #eee;
+
+    --game: #171A1D;
+    --poly1: #292B2D;
+    --poly2: #222427;
 }
 
 body {
     height: 100vh;
     width: 100vw;
     background-color: var(--bg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
+
+}
+
+.bg {
+    z-index: -1;
+    position: absolute;
+    top: 0;left: 0;
+    width: 100%;
+    height: 100%;
+
+    opacity: 0.03;
+    background-image:  linear-gradient(var(--text) 2px, transparent 2px), linear-gradient(90deg, var(--text) 2px, transparent 2px), linear-gradient(var(--text) 1px, transparent 1px), linear-gradient(90deg, var(--text) 1px, var(--card-bg) 1px);
+    background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
+    background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
 }
 
 .container {
@@ -28,7 +41,7 @@ body {
     width: 100vw;
     max-height: 600px;
     height: auto;
-    background-color: var(--card-bg);
+    background-color: var(--game);
     border-radius: 5px;
     user-select: none;
     padding: 10px;
@@ -41,7 +54,7 @@ body {
 
 .card {
     cursor: pointer;
-    background-color: var(--card-bg);
+    background-color: var(--poly2);
     border-radius: 5px;
     transition: all .4s ease-out;
 
@@ -85,3 +98,42 @@ body {
     transform: rotateY(180deg);
     background-color: rgb(99, 135, 99);
 }
+
+main {
+    width: 100%;
+    height: 100%;
+    display: grid;
+    gap: 0px;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.game {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.content {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 50px 0;
+    user-select: none;
+}
+
+.title {
+    color: var(--text);
+    font-weight: 900;
+    font-size: 3em;
+}
+
+/* .title span {
+    border-radius: 15px;
+    background-color: #ffffff88;
+} */
