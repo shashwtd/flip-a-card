@@ -165,7 +165,7 @@ function install_listeners() {
 }
 
 function init() {
-    kaam_shuru(6);
+    kaam_shuru(5);
     initialize_cards();
     install_listeners();
 }
