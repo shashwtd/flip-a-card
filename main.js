@@ -1,7 +1,8 @@
 var cards = [], associations = [], flipped = [];
 let first_flip = '', second_flip = '', previousTarget;
 var count = 0, delay = 800;
-const astley = true;
+var astley = true;
+var astley_activated = true;
 var API_KEY = '31266814-2adc0eb15aa7d78852e5cb233';
 var URL = "https://pixabay.com/api/?key="+API_KEY+"&q="+encodeURIComponent('minimal');
 const items = [
@@ -132,6 +133,7 @@ function rickroll(elm) {
     elm.classList.add('astley');
     let roll = document.getElementById("rickroll_audio");
     roll.play();
+    no_more_astley();
 
     let uncovered = cards.concat([]);
     uncovered.splice(cards.indexOf(elm), 1);
@@ -150,10 +152,16 @@ function rickroll(elm) {
     }, 400);
 }
 
+function no_more_astley() {
+    astley = false;
+    astley_activated = true;
+}
+
 function install_listeners() {
     cards.forEach(card => {
         card.addEventListener("click", e => {
             if (astley){
+                if (astley_activated){return;}
                 rickroll(e.target);
             } else {
                 handle_flip(e.target);
