@@ -89,18 +89,6 @@ body {
     background-image: linear-gradient(45deg, transparent 50%, #c8c8c844 50%);
 }
 
-.card[flipped] {
-    transform: rotateY(180deg);
-    opacity: 0.8;
-    background-color: gray;
-}
-
-.card[matched] {
-    opacity: 0.8;
-    transform: rotateY(180deg);
-    background-color: rgb(99, 135, 99);
-}
-
 main {
     width: 100%;
     height: 100%;

@@ -1,34 +1,7 @@
 var cards = [], associations = [], flipped = [];
 let first_flip = '', second_flip = '', previousTarget;
 var count = 0, delay = 800;
-var astley = true;
-var astley_activated = true;
-var API_KEY = '31266814-2adc0eb15aa7d78852e5cb233';
-var URL = "https://pixabay.com/api/?key="+API_KEY+"&q="+encodeURIComponent('minimal');
-const items = [
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "10",
-    "11",
-    "12",
-    "13",
-    "14",
-    "15",
-    "16",
-    "17",
-    "18",
-]
-
-function getKeyByValue(object, value) {
-    return Object.keys(object).find(key => object[key] === value);
-}
+var astley_activated = false;
 
 function kaam_shuru(size = 1) {
     let card_container = document.getElementById('container-main')
@@ -48,66 +21,6 @@ function kaam_shuru(size = 1) {
     return true;
 }
 
-function initialize_cards() {
-    for (let index = 0; index < cards.length/2; index++) {
-        associations.push(items[index]);
-    }
-    
-    associations = associations.concat(associations);
-    associations = associations.sort(() => Math.random() - 0.5);
-
-    for (let index = 0; index < associations.length; index++) {
-        const elm = cards[index];
-        // elm.innerText = associations[index];
-    }
-}
-
-const resetGuesses = () => {
-    first_flip = '';
-    second_flip = '';
-    count = 0;
-    previousTarget = null;
-
-    let selected = document.querySelectorAll('[flipped]');
-    for (let i = 0; i < selected.length; i++) {
-        selected[i].removeAttribute('flipped')
-    }
-};
-
-const match = () => {
-    let selected = document.querySelectorAll('[flipped]');
-    for (let i = 0; i < selected.length; i++) {
-        selected[i].setAttribute("matched", 'true');
-    }
-}
-
-function handle_flip(elm) {
-    if (elm.hasAttribute('flipped') || elm.hasAttribute('matched')) {
-        return;
-    }
-    if(count < 2){
-        count ++;
-        if (count === 1){
-            first_flip = associations[cards.indexOf(elm)];
-            elm.setAttribute('flipped', 'true')
-        } else{
-            second_flip = associations[cards.indexOf(elm)];
-            elm.setAttribute('flipped', 'true')
-        }
-
-        if(first_flip !== '' && second_flip !== ''){
-            if (first_flip === second_flip) {
-                setTimeout(match, delay/2);
-                setTimeout(resetGuesses, delay);
-            }else {
-                setTimeout(resetGuesses, delay);
-            }
-        }
-
-        previousTarget = elm;
-    }
-}
-
 function astley_wink() {
     let __ = cards.concat([]);
     
@@ -120,11 +33,7 @@ function astley_wink() {
         }
         for (let index = 0; index < __2.length; index++) {
             const element = __2[index];
-            if (element.classList.contains("astley")) {
-                element.classList.remove("astley");
-            } else {
-                element.classList.add("astley");
-            }
+            troll_(element);
         }
     }, 600)
 }
@@ -152,20 +61,28 @@ function rickroll(elm) {
     }, 400);
 }
 
+function troll_(elm) {
+    if (elm.classList.contains("astley")) {
+        elm.classList.remove("astley");
+    } else {
+        elm.classList.add("astley");
+    }
+}
+
 function no_more_astley() {
-    astley = false;
-    astley_activated = true;
+    return astley_activated = true;
 }
 
 function install_listeners() {
     cards.forEach(card => {
         card.addEventListener("click", e => {
-            if (astley){
-                if (astley_activated){return;}
-                rickroll(e.target);
-            } else {
-                handle_flip(e.target);
+            if (astley_activated){
+                return troll_(e.target);
             }
+            rickroll(e.target);
+        });
+        card.addEventListener('mouseover', e => {
+            if (astley_activated){return troll_(e.target);}
         });
     });
 
@@ -173,8 +90,7 @@ function install_listeners() {
 }
 
 function init() {
-    kaam_shuru(5);
-    initialize_cards();
+    kaam_shuru(6);
     install_listeners();
 }
 
