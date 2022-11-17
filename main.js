@@ -3,6 +3,8 @@ let first_flip = '', second_flip = '', previousTarget;
 var count = 0, delay = 800;
 var astley_activated = false;
 
+var isSmall = screen.width<=1000;
+
 function kaam_shuru(size = 1) {
     let card_container = document.getElementById('container-main')
     while (card_container.firstChild) { card_container.removeChild(card_container.firstChild); }
@@ -90,7 +92,11 @@ function install_listeners() {
 }
 
 function init() {
-    kaam_shuru(5);
+    if (isSmall) { 
+        kaam_shuru(4)
+    } else {
+        kaam_shuru(5);
+    }
     install_listeners();
 }
 
