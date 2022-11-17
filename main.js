@@ -81,16 +81,16 @@ function install_listeners() {
             }
             rickroll(e.target);
         });
-        card.addEventListener('mouseover', e => {
-            if (astley_activated){return troll_(e.target);}
-        });
+        // card.addEventListener('mouseover', e => {
+        //     if (astley_activated){return troll_(e.target);}
+        // });
     });
 
     return true;
 }
 
 function init() {
-    kaam_shuru(6);
+    kaam_shuru(5);
     install_listeners();
 }
 
